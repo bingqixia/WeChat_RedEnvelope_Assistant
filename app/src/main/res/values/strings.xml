@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">WeChat_RedEnvelope_Assistant</string>
+    <string name="app_name">微信红包助手</string>
+    <string name="service_run">后台服务已启动</string>
+    <string name="service_stop">后台服务未启动</string>
+    <string name="wechat_version" formatted="false">当前微信版本: %s</string>
+    <string name="interval" >时间间隔: </string>
 </resources>
