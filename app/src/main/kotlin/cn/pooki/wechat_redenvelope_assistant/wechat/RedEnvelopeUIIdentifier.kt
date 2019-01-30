@@ -1,6 +1,7 @@
 package cn.pooki.wechat_redenvelope_assistant.wechat
 
 import android.view.accessibility.AccessibilityNodeInfo
+import kotlin.concurrent.thread
 
 object RedEnvelopeUIIdentifier {
     private lateinit var redEnvIds: Map<RedEnvelopeIds.RedEnvelopeKey, String>
@@ -82,11 +83,14 @@ object RedEnvelopeUIIdentifier {
 
     fun clickRedEnvelope(root: AccessibilityNodeInfo) {
         //ToDo：check is it already over
+        //考虑到红包的时效，只抢最后一个
 
         val node = root.findAccessibilityNodeInfosByViewId(redEnvIds[RedEnvelopeIds.RedEnvelopeKey.redEnvelope])
         if (node != null && node.isNotEmpty()) {
 //            val textCnt = node[0].getChild(0).getChild(0).getChild(1).childCount
-            performClickNode(node[0])
+            val cnt = node.size
+            if (node[node.size-1] != null)
+            performClickNode(node[node.size-1])
         }
     }
 
@@ -105,5 +109,18 @@ object RedEnvelopeUIIdentifier {
         }
     }
 
-    fun
+    fun clickRedEnvelopeBack(root: AccessibilityNodeInfo) {
+        val nodeBack = root.findAccessibilityNodeInfosByViewId(redEnvIds[RedEnvelopeIds.RedEnvelopeKey.packageBack])
+        if (nodeBack != null && nodeBack.isNotEmpty()) {
+            performClickNode(nodeBack[0])
+        }
+    }
+
+    fun clickChatRoomBack(root: AccessibilityNodeInfo) {
+        val node = root.findAccessibilityNodeInfosByViewId(redEnvIds[RedEnvelopeIds.RedEnvelopeKey.chatRoomBack])
+        if (node != null && node.isNotEmpty()) {
+            performClickNode(node[0])
+        }
+    }
+
 }
